@@ -1,0 +1,13 @@
+{
+  "trailingComma": "es5",
+  "tabWidth": 2,
+  "semi": true,
+  "singleQuote": true,
+  "jsxSingleQuote": true,
+  "printWidth": 150,
+  "eslintIntegration": true,
+  "endOfLine": "auto",
+  "parser": "typescript",
+  "useTabs": true,
+  "arrowParens": "always"
+}
