@@ -15,7 +15,7 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
 					<Button size='sm'>로그인</Button>
 				</nav>
 			</div>
-			{children}
+			<main className='main-container'>{children}</main>
 		</div>
 	);
 };
