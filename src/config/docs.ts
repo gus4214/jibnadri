@@ -9,4 +9,8 @@ export const MAIN_NAV: NavItem[] = [
 		title: '지역 보기',
 		href: '/regions',
 	},
+	{
+		title: '지도 보기',
+		href: '/map',
+	},
 ];
