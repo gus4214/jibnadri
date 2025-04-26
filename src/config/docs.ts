@@ -13,4 +13,8 @@ export const MAIN_NAV: NavItem[] = [
 		title: '지도 보기',
 		href: '/map',
 	},
+	{
+		title: '네이버 지도',
+		href: '/naver-map',
+	},
 ];
