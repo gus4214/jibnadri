@@ -11,6 +11,7 @@ interface Coordinate {
 interface District {
 	id: number;
 	name: string;
+	code: string;
 	polygons: Coordinate[][]; // 각 구에 속한 다수의 폴리곤 배열
 	center: Coordinate;
 	focus?: boolean;
@@ -19,7 +20,9 @@ interface District {
 interface GeoJsonFeature {
 	type: string;
 	properties: {
+		// 시/군/구 이름
 		sggnm: string;
+		// 시/군/구 코드
 		adm_cd: string;
 		[key: string]: unknown;
 	};
@@ -29,24 +32,10 @@ interface GeoJsonFeature {
 	};
 }
 
-// 이벤트 인터페이스 정의
-interface MouseEvent {
-	domEvent: {
-		clientX: number;
-		clientY: number;
-	};
-	coord: {
-		x: number;
-		y: number;
-		_lat: number;
-		_lng: number;
-	};
-}
-
 const AppMap = () => {
 	const navermaps = useNavermaps();
 	const [seoulDistricts, setSeoulDistricts] = useState<District[]>([]);
-	const [hoveredDistrict, setHoveredDistrict] = useState<number | null>(null);
+	const [hoveredDistrict, setHoveredDistrict] = useState<District | null>(null);
 
 	// 서울시 구 데이터 로드
 	useEffect(() => {
@@ -62,6 +51,7 @@ const AppMap = () => {
 						const district = {
 							id: parseInt(feature.properties.adm_cd.substring(0, 5)),
 							name: feature.properties.sggnm,
+							code: feature.properties.adm_cd,
 							polygons: [] as Coordinate[][],
 							center: { lat: 0, lng: 0 },
 							focus: false,
@@ -90,8 +80,8 @@ const AppMap = () => {
 	}, []);
 
 	// 마우스 이벤트 핸들러
-	const handleMouseOver = (districtId: number) => {
-		setHoveredDistrict(districtId);
+	const handleMouseOver = (district: District) => {
+		setHoveredDistrict((prev) => ({ ...prev, ...district }));
 	};
 
 	const handleMouseOut = () => {
@@ -103,7 +93,7 @@ const AppMap = () => {
 			{/* 호버/선택된 구역만 표시 */}
 			{seoulDistricts.map((district) =>
 				district.polygons.map((polygon, polyIndex) => {
-					const isHovered = hoveredDistrict === district.id;
+					const isHovered = hoveredDistrict?.id === district.id;
 
 					return (
 						<Polygon
@@ -116,7 +106,7 @@ const AppMap = () => {
 							strokeOpacity={isHovered ? 0.3 : 0}
 							strokeStyle='dash'
 							clickable={true}
-							onMouseover={(e) => handleMouseOver(district.id)}
+							onMouseover={(e) => handleMouseOver(district)}
 							onMouseout={handleMouseOut}
 						/>
 					);
