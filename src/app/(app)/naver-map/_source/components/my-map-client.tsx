@@ -26,6 +26,8 @@ const MyMapClient = ({ districts }: MyMapClientProps) => {
 	const [hoveredDistrict, setHoveredDistrict] = useState<District | null>(null);
 	const [selectedDistrict, setSelectedDistrict] = useState<District | null>(null);
 
+	const [isMeasuring, setIsMeasuring] = useState(false);
+
 	const handleMouseOver = (district: District) => {
 		setHoveredDistrict(district);
 	};
@@ -69,8 +71,8 @@ const MyMapClient = ({ districts }: MyMapClientProps) => {
 				)}
 			</NaverMap>
 			<div className='fixed bottom-8 left-1/2 -translate-x-1/2'>
-				<Button size='lg' className='rounded-full font-bold'>
-					나들이 경로 그리기
+				<Button size='lg' className='rounded-full font-bold' onClick={() => setIsMeasuring(!isMeasuring)}>
+					{isMeasuring ? '그리기 취소' : '나들이 경로 그리기'}
 				</Button>
 			</div>
 		</>
