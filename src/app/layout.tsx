@@ -3,7 +3,6 @@ import './globals.css';
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 
-import MapProvider from '@/components/map-provider';
 import { ThemeProvider } from '@/components/theme-provider';
 
 const geistSans = Geist({
@@ -30,7 +29,7 @@ export default function RootLayout({
 		<html lang='en' suppressHydrationWarning>
 			<body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
 				<ThemeProvider attribute='class' enableSystem disableTransitionOnChange>
-					<MapProvider>{children}</MapProvider>
+					{children}
 				</ThemeProvider>
 			</body>
 		</html>

@@ -57,7 +57,7 @@ const RegionFilter: FC<RegionFilterProps> = ({ regions_1, regions_2 }) => {
 				<PopoverTrigger asChild>
 					<Button variant='secondary' size='lg' className='bg-white'>
 						<MapPin className='h-4 w-4 text-[#FF7E36]' />
-						<span className='font-bold'>{`${currentRegion.region_1?.name} ${currentRegion.region_2?.name}`}</span>
+						<span className='font-bold'>{`지역선택`}</span>
 						<ChevronDown className='h-4 w-4 text-[#9E9E9E]' />
 					</Button>
 				</PopoverTrigger>

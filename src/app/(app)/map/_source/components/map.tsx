@@ -4,6 +4,7 @@ import { FC, useState } from 'react';
 import { Map as KakaoMap, Polygon } from 'react-kakao-maps-sdk';
 
 import { District } from '@/app/(app)/map/_source/components/map-loader';
+import useKakaoLoader from '@/app/(app)/map/_source/hooks/useKakaoLoader';
 import { useMapPropsStorage } from '@/app/(app)/map/_source/hooks/useMapPropsStorage';
 import { Button } from '@/components/button';
 
@@ -16,6 +17,7 @@ const Map: FC<MapProps> = ({ districts }) => {
 	const [selectedDistrict, setSelectedDistrict] = useState<District | null>(null);
 	const [isMeasuring, setIsMeasuring] = useState(false);
 
+	useKakaoLoader();
 	const { centerCoordinate, zoom, saveZoom } = useMapPropsStorage();
 
 	const handleMouseOver = (district: District) => {
